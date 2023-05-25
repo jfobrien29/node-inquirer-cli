@@ -1,9 +1,9 @@
-# node-inquirer-sms-cli
+# node-inquirer-cli
 
-Student Management System CLI using Node.js, TypeScript and Inquirer
+CLI using Node.js, TypeScript and Inquirer
 
 ## Run
 
 ```bash
-npx studmagcli
+npx inquirer-cli
 ```

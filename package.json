@@ -1,8 +1,8 @@
 {
-  "name": "studmagcli",
+  "name": "inquirer-cli",
   "version": "1.0.1",
-  "description": "Student Management System CLI using Node.js, TypeScript and Inquirer",
-  "homepage": "https://github.com/saadfrhan/node-inquirer-sms-cli#readme",
+  "description": "CLI written with Node.js, TypeScript and Inquirer",
+  "homepage": "https://github.com/jfobrien29/node-inquirer-cli",
   "main": "src/index",
   "type": "module",
   "scripts": {
@@ -17,5 +17,8 @@
     "chalk-animation": "^2.0.3",
     "inquirer": "^9.1.4",
     "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@types/chalk-animation": "^1.6.1"
   }
 }
