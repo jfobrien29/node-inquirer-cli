@@ -29,7 +29,6 @@ export const generateWelcomePoem = async (name: string) => {
 
     return completion.data.choices[0].message?.content || null;
   } catch (e) {
-    console.error(`Error creating completion for input ${getPrompt(name)}: ${e}`);
-    return '';
+    return `There was an issue writing your poem, but we're excited to have you here ${name}!`;
   }
 };
