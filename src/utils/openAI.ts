@@ -12,7 +12,8 @@ const getPrompt = (name: string) => {
   return `Write a haiku about a person named "${name}".
     This is a welcome poem, so make it positive and show them that you're happy to meet them. 
     Make the poem rythme and include puns that have to do with thier name.
-    Don't make assumptions about their gender, age, or anything else.`;
+    Don't make assumptions about their gender, age, or anything else.
+    Don't mention puns in the output.`;
 };
 
 export const generateWelcomePoem = async (name: string) => {

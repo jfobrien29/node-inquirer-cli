@@ -1,5 +1,5 @@
 {
-  "name": "inquirer-cli",
+  "name": "ws-cli",
   "version": "1.0.1",
   "description": "CLI written with Node.js, TypeScript and Inquirer",
   "homepage": "https://github.com/jfobrien29/node-inquirer-cli",
