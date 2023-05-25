@@ -1,2 +1,6 @@
+# Basics
 node_modules
 dist
+
+# Prettier
+.prettierignore

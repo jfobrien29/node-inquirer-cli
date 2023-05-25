@@ -1,22 +1,23 @@
-#!/usr/bin/env node 
- 
-import inquirer from "inquirer"; 
-import { welcome } from "./utils/welcome.js"; 
- 
+#!/usr/bin/env node
+
+import inquirer from 'inquirer';
+import { welcome } from './utils/welcome.js';
+import { getRandomGreeting } from './utils/random.js';
+
 async function main() {
-  const { name } = await inquirer.prompt([ 
+  const { name } = await inquirer.prompt([
     {
       type: 'input',
       name: 'name',
-      message: 'What\'s your name?',
-    }, 
-  ]) 
- 
-  console.log(`Hello, ${name}!`);
-} 
+      message: "What's your name?",
+    },
+  ]);
 
-// For fun, can remove
-await welcome(); 
+  console.log(`${getRandomGreeting()}, ${name}!`);
+}
+
+// For fun, can remove for the real thing!
+await welcome();
 
 // The main loop
-await main(); 
+await main();
