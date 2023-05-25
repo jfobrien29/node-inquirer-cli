@@ -1,6 +1,7 @@
 # Basics
 node_modules
 dist
+.env
 
 # Prettier
 .prettierignore
