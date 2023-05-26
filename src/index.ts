@@ -1,33 +1,82 @@
 #!/usr/bin/env node
 
 import inquirer from 'inquirer';
-import chalkAnimation from 'chalk-animation';
 
-import { getRandomGreeting } from './utils/random.js';
-import { generateWelcomePoem } from './utils/openAI.js';
-import chalk from 'chalk';
+const CORRECT_GUESS = '🟩';
+const CORRECT_BUT_WRONG_POSITION = '🟨';
+const WRONG_GUESS = '⬜';
+const WORD_LENGTH = 5;
 
 async function main() {
-  const { name } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: "What's your name?",
-    },
-  ]);
+  // pick a random 5 letter word (maybe set it while testing)
+  const targetWord = 'ERTHE';
+  let turn = 0;
 
-  console.log();
-  console.log(`${getRandomGreeting()}, ${name}!`);
-  console.log();
+  // game loop
+  while (turn < 6) {
+    // input
+    const { guess } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'guess',
+        message: "What's your guess?",
+      },
+    ]);
 
-  const loading = chalkAnimation.neon('Writing a poem to greet you...');
-  const haiku = await generateWelcomePoem(name);
-  loading.replace('');
-  loading.stop();
+    // TODO add validation
+    // Assume guess is 5 characters long, alphanumeric
 
-  console.log();
-  console.log(chalk.blueBright(haiku));
-  console.log();
+    const targetWordLetterMap = targetWord.split('').reduce((acc, letter) => {
+      acc.has(letter) ? acc.set(letter, acc.get(letter)! + 1) : acc.set(letter, 1);
+      return acc;
+    }, new Map<string, number>());
+
+    const greenWhiteOutputArray = (guess as string)
+      .toUpperCase()
+      .split('')
+      .map((letter, index) => {
+        if (letter === targetWord[index]) {
+          targetWordLetterMap.set(letter, targetWordLetterMap.get(letter)! - 1);
+          return CORRECT_GUESS;
+        } else {
+          return WRONG_GUESS;
+        }
+      });
+
+    const finalOutput = (guess as string)
+      .toUpperCase()
+      .split('')
+      .map((letter, index) => {
+        if (
+          letter !== targetWord[index] &&
+          targetWord.includes(letter) &&
+          targetWordLetterMap.get(letter)! > 0
+        ) {
+          targetWordLetterMap.set(letter, targetWordLetterMap.get(letter)! - 1);
+          return CORRECT_BUT_WRONG_POSITION;
+        } else {
+          console.log(index, greenWhiteOutputArray, greenWhiteOutputArray[index]);
+          return greenWhiteOutputArray[index];
+        }
+      });
+
+    // print out the guess, print out the output
+    console.log(guess);
+    console.log(finalOutput.join(''));
+
+    // check if everything is green, if yes exit (you win)
+    if (finalOutput.join('') === CORRECT_GUESS.repeat(WORD_LENGTH)) {
+      console.log('You win!');
+      return;
+    }
+
+    // increment turn
+    turn++;
+  }
+
+  if (turn >= 6) {
+    console.log('Game over :(');
+  }
 }
 
 // The main loop

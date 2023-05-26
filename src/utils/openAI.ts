@@ -32,3 +32,20 @@ export const generateWelcomePoem = async (name: string) => {
     return `There was an issue writing your poem, but we're excited to have you here ${name}!`;
   }
 };
+
+// export const generateWelcomePoem = async (name: string) => {
+//     try {
+//       const completion = await openai.createChatCompletion({
+//         model: 'gpt-4',
+//         messages: [{ role: 'user', content: getPrompt(name) }],
+//         temperature: 0.7,
+//         max_tokens: 1000,
+//       });
+
+//       // console.info(completion.data.choices[0].message?.content);
+
+//       return completion.data.choices[0].message?.content || null;
+//     } catch (e) {
+//       return `There was an issue writing your poem, but we're excited to have you here ${name}!`;
+//     }
+//   };
