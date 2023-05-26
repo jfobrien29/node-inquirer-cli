@@ -19,7 +19,7 @@ async function main() {
       {
         type: 'input',
         name: 'guess',
-        message: "What's your guess?",
+        message: `What's your guess? (${6 - turn} turn${6 - turn === 1 ? '' : 's'} left):`,
       },
     ]);
 
@@ -55,7 +55,6 @@ async function main() {
           targetWordLetterMap.set(letter, targetWordLetterMap.get(letter)! - 1);
           return CORRECT_BUT_WRONG_POSITION;
         } else {
-          console.log(index, greenWhiteOutputArray, greenWhiteOutputArray[index]);
           return greenWhiteOutputArray[index];
         }
       });
